@@ -20,15 +20,20 @@ bool cargarCoches(string const& fichEntrada) {
 	if (!input.is_open()) {} //throw(Error(“No se encuentra el fichero”));
 
 	else {
-		string c;
-		//input.getline(cin, c);
-		for (int i = 0; i < 4; i++) {
+		int k;
+		input >> k;
+		//cout << k << endl;
+		for (int i = 0; i < ((k * 3) + 10); i++) {
+			string c;
 			input >> c;
 			/*while (!input.fail()) {
 				if (c != ' ')
 				input.get(c);
 			}*/
-			cout << c << endl;
+			if ((i - 3) % 4 == 0)
+				cout << c << endl;
+			else
+				cout << c + ' ';
 		}
 	}
 	input.close();
