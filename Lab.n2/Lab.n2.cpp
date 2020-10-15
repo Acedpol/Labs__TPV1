@@ -28,7 +28,7 @@ void mostrarListaC(ListaCoches& listaC)
 	int i = 0;
 	while (i < listaC.tam)
 	{
-		cout << listaC.cars[i].codigo << ' ' << listaC.cars[i].precio << ' ' << listaC.cars[i].modelo << endl;
+		cout << i << " -> " << listaC.cars[i].codigo << ' ' << listaC.cars[i].precio << ' ' << listaC.cars[i].modelo << endl;
 		i++;
 	}
 }
@@ -63,6 +63,21 @@ bool cargarCoches(string const& fichEntrada, ListaCoches& listaC)
 	}	
 }
 
+Coche* buscarCoche(int code, ListaCoches& listaC)
+{
+	Coche* c = nullptr;
+	int i = 0;
+	while (i < listaC.tam)
+	{
+		if (listaC.cars[i].codigo == code)
+		{
+			c = &listaC.cars[i];
+		}
+		i++;
+	}
+	return c;
+}
+
 #pragma endregion
 
 int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
@@ -71,7 +86,10 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 	string file = "coches.txt";
 
 	cargarCoches(file, listaC);
+	cout << "punteroCoche: " << buscarCoche(1200, listaC) << endl;
+	cout << "punteroCoche2: " << buscarCoche(1325, listaC) << endl;
 	delete[] listaC.cars;
+
 	system("pause"); // -> módulo utilsSystem
 	return 0;
 }
