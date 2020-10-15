@@ -5,46 +5,73 @@
 
 using namespace std; /* para nombrar sin cualificar con std:: */
 
+#pragma region STRUCTS
+
 struct Coche {
 	int codigo;
-	int precio;
+	int precio; // por dia
 	string modelo;
-	Coche(int c, int p, int m) {
-		codigo = c; precio = p; modelo = m;
-	}
+	//Coche(int c, int p, string m): codigo(c), precio(p), modelo(m) {}; **ESTA LINEA ES PUTA MIERDA** -> (el constructor está bien hecho, pero en los structs no se hace y me ha dado mazo problemas)
 };
 
-bool cargarCoches(string const& fichEntrada) {
-	ifstream input;
-	input.open(fichEntrada);
-	if (!input.is_open()) {} //throw(Error(“No se encuentra el fichero”));
+struct ListaCoches {
+	Coche* cars; // array dinamico
+	int tam = 0; // tamaño escalable
+};
 
-	else {
-		int k;
-		input >> k;
-		//cout << k << endl;
-		for (int i = 0; i < ((k * 3) + 10); i++) {
-			string c;
-			input >> c;
-			/*while (!input.fail()) {
-				if (c != ' ')
-				input.get(c);
-			}*/
-			if ((i - 3) % 4 == 0)
-				cout << c << endl;
-			else
-				cout << c + ' ';
-		}
+#pragma endregion
+
+#pragma region METODOS
+
+void mostrarListaC(ListaCoches& listaC)
+{
+	int i = 0;
+	while (i < listaC.tam)
+	{
+		cout << listaC.cars[i].codigo << ' ' << listaC.cars[i].precio << ' ' << listaC.cars[i].modelo << endl;
+		i++;
 	}
-	input.close();
-	return true;
 }
 
-int main(int argc, char* argv[]) { // Argumentos: Array de cadenas estilo C
+bool cargarCoches(string const& fichEntrada, ListaCoches& listaC) 
+{
+	ifstream input;
+	input.open(fichEntrada);	
 
-	cargarCoches("./coches.txt");
+	if (input.is_open()) //throw(Error(“No se encuentra el fichero”)); -> esto sobra, con el if salva la excepcion
+	{
+		int cont;
+		input >> listaC.tam; // hay 'X' coches
+		listaC.cars = new Coche[listaC.tam];
+		int i = 0;
+		while (!input.fail() && i < listaC.tam) 
+		{
+			input >> listaC.cars[i].codigo;
+			input >> listaC.cars[i].precio;
+			getline(input, listaC.cars[i].modelo); // asi es como se usa :)
+			i++;
+		}
+		input.close();
+		mostrarListaC(listaC);
+		//delete[] listaC.cars;
+		return true;
+	} 
+	else 
+	{
+		input.close();
+		return false;
+	}	
+}
+
+#pragma endregion
+
+int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
+{ 
+	ListaCoches listaC;
+	string file = "coches.txt";
+
+	cargarCoches(file, listaC);
+	delete[] listaC.cars;
 	system("pause"); // -> módulo utilsSystem
 	return 0;
-
-
 }
