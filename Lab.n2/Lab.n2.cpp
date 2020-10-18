@@ -45,20 +45,22 @@ struct ListaAlquileres {
 
 #pragma region METODOS
 
-void mostrarListaC(ListaCoches& listaC)
+void mostrarListaC(const ListaCoches& listaC)
 {
 	int i = 0;
-	while (i < listaC.tam)
+	cout << "~ Lista Coches ~" << endl;
+	while (i < listaC.cont - 1)
 	{
 		cout << i << " -> " << listaC.cars[i].codigo << ' ' << listaC.cars[i].precio << ' ' << listaC.cars[i].modelo << endl;
 		i++;
 	}
 }
 
-void mostrarListaA(ListaAlquileres& listaA)
+void mostrarListaA(const ListaAlquileres& listaA)
 {
 	int i = 0;
-	while (i < listaA.tam)
+	cout << "~ Lista Alquileres ~" << endl;
+	while (i < listaA.cont - 1)
 	{
 		cout << i << " -> " << listaA.rents[i].codigo << ' ' << listaA.rents[i].f.ano << '-' << listaA.rents[i].f.mes << '-' << listaA.rents[i].f.dia << ' ' << listaA.rents[i].numDias << endl;
 		i++;
@@ -85,6 +87,7 @@ bool cargarCoches(string const& fichEntrada, ListaCoches& listaC)
 			i++;
 			listaC.cont++;
 		}
+		mostrarListaC(listaC);
 		input.close();
 		return true;
 	} 
@@ -110,7 +113,7 @@ Coche* buscarCoche(int code, ListaCoches& listaC)
 	return c;
 }
 
-bool leerAlquileres(string const& fichEntrada, ListaAlquileres& listaA, ListaCoches& listaC)
+bool leerAlquileres(string const& fichEntrada, ListaAlquileres& listaA, ListaCoches& const listaC)
 {
 	ifstream input;
 	input.open(fichEntrada);	
@@ -131,8 +134,9 @@ bool leerAlquileres(string const& fichEntrada, ListaAlquileres& listaA, ListaCoc
 			input >> listaA.rents[i].numDias;
 			listaA.rents[i].puntCoche = buscarCoche(listaA.rents[i].codigo, listaC);
 			i++;
-			listaA.cont++;
+			listaA.cont++;			
 		}
+		mostrarListaA(listaA);
 		input.close();
 		return true;
 	} 
@@ -157,6 +161,7 @@ bool leerAlquileres(string const& fichEntrada, ListaAlquileres& listaA, ListaCoc
 //	       (f1Ano == f2Ano && f1Mes < f2Mes || 
 //		   (f1Mes == f2Mes && f1Dia < f2Dia)));
 //}
+/*
 bool Comparador(const Alquiler f1, const Alquiler f2) {
 	//aqui
 	int f1Ano, f1Mes, f1Dia, f2Ano, f2Mes, f2Dia;
@@ -175,7 +180,7 @@ void ordenarAlquileres(ListaAlquileres& listaA)
 {
 	sort(&listaA.rents[0], &listaA.rents[listaA.cont], Comparador);
 	mostrarListaA(listaA);
-}
+}*/
 
 #pragma endregion
 
@@ -188,7 +193,7 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 
 	cargarCoches(file, listaC);
 	leerAlquileres(file2, listaA, listaC);
-	ordenarAlquileres(listaA);
+	//ordenarAlquileres(listaA);
 	/*cout << "punteroCoche: " << buscarCoche(1200, listaC) << endl;
 	cout << "punteroCoche2: " << buscarCoche(1325, listaC) << endl;*/
 	delete[] listaC.cars;
