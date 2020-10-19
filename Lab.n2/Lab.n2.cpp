@@ -7,11 +7,22 @@
 using namespace std; /* para nombrar sin cualificar con std:: */
 
 #pragma region STRUCTS
-struct fecha
+struct Fecha
 {
-	string ano;
-	string mes;
-	string dia;
+	int ano;
+	int mes;
+	int dia;	
+	Fecha() : ano(0), mes(0), dia(0) {};
+	//Fecha(string date) : 
+	//	ano((date[0] + date[1])),		//ano(stoi(date.substr(0, 2))), 
+	//	mes((date[3] + date[4])),	//mes(stoi(date.substr(3, 2))), 
+	//	dia((date[6] + date[7]))	//dia(stoi(date.substr(6, 2)))
+	//{};
+	string toString() 
+	{
+		string date = to_string(ano) + '/' + to_string(mes) + '/' + to_string(dia);
+		return date;
+	};
 };
 
 struct Coche {
@@ -19,25 +30,29 @@ struct Coche {
 	int precio; // por dia
 	string modelo;
 	//Coche(int c, int p, string m): codigo(c), precio(p), modelo(m) {}; **ESTA LINEA ES PUTA MIERDA** -> (el constructor está bien hecho, pero en los structs no se hace y me ha dado mazo problemas)
+	Coche(): codigo(0), precio(0) {};
 };
 
 struct ListaCoches {
 	Coche* cars; // array dinamico
 	int tam = 0; // tamaño escalable
 	int cont = 0; // Numero real de elementos
+	ListaCoches() : cars(nullptr) {};
 };
 
 struct Alquiler {
-	int codigo;
-	fecha f;
-	int numDias;
-	Coche* puntCoche; //puntero al coche al que hace referencia
+	int codigo = {};
+	string fechaString;
+	Fecha f;
+	int numDias = {};
+	Coche* puntCoche = {}; //puntero al coche al que hace referencia
 };
 
 struct ListaAlquileres {
 	Alquiler* rents; // array dinamico
 	int tam = 0; // tamaño escalable
 	int cont = 0; // Numero real de elementos
+	ListaAlquileres() : rents(nullptr) {};
 };
 
 
@@ -62,7 +77,7 @@ void mostrarListaA(const ListaAlquileres& listaA)
 	cout << "~ Lista Alquileres ~" << endl;
 	while (i < listaA.cont - 1)
 	{
-		cout << i << " -> " << listaA.rents[i].codigo << ' ' << listaA.rents[i].f.ano << '-' << listaA.rents[i].f.mes << '-' << listaA.rents[i].f.dia << ' ' << listaA.rents[i].numDias << endl;
+		cout << i << " -> " << listaA.rents[i].codigo << ' ' << listaA.rents[i].f.toString() << ' ' << listaA.rents[i].numDias << endl;
 		i++;
 	}
 }
@@ -128,9 +143,18 @@ bool leerAlquileres(string const& fichEntrada, ListaAlquileres& listaA, ListaCoc
 		{
 			input >> listaA.rents[i].codigo;
 			//input >> listaA.rents[i].fechaString;
-			getline(input, listaA.rents[i].f.ano, '/');
+			char c;
+			input >> listaA.rents[i].f.ano;
+			input >> c;
+			input >> listaA.rents[i].f.mes;
+			input >> c;
+			input >> listaA.rents[i].f.dia;
+			/*string date;
+			input >> date;
+			listaA.rents[i].f = new Fecha(date);*/
+			/*getline(input, listaA.rents[i].f.ano, '/');
 			getline(input, listaA.rents[i].f.mes, '/');
-			getline(input, listaA.rents[i].f.dia, ' ');
+			getline(input, listaA.rents[i].f.dia, ' ');*/
 			input >> listaA.rents[i].numDias;
 			listaA.rents[i].puntCoche = buscarCoche(listaA.rents[i].codigo, listaC);
 			i++;
@@ -146,7 +170,6 @@ bool leerAlquileres(string const& fichEntrada, ListaAlquileres& listaA, ListaCoc
 		return false;
 	}	
 }
-
 
 //bool Comparador(const fecha& f1,const fecha& f2) {
 //	//aqui
@@ -174,13 +197,19 @@ bool Comparador(const Alquiler f1, const Alquiler f2) {
 	return (f1Ano < f2Ano ||
 	       (f1Ano == f2Ano && f1Mes < f2Mes || 
 		   (f1Mes == f2Mes && f1Dia < f2Dia)));
-}
-
-void ordenarAlquileres(ListaAlquileres& listaA)
-{
-	sort(&listaA.rents[0], &listaA.rents[listaA.cont], Comparador);
-	mostrarListaA(listaA);
 }*/
+//bool Comparador(const Fecha f1,const Fecha f2) {
+//	//aqui
+//	return (f1.ano < f2.ano ||
+//	       (f1.ano == f2.ano && f1.mes < f2.mes ||
+//		   (f1.mes == f2.mes && f1.dia < f2.dia)));
+//}
+//
+//void ordenarAlquileres(ListaAlquileres& listaA)
+//{
+//	sort(&listaA.rents[0].f, &listaA.rents[listaA.cont].f, Comparador);
+//	mostrarListaA(listaA);
+//}
 
 #pragma endregion
 
@@ -191,13 +220,20 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 	string file = "coches.txt";
 	string file2 = "rent.txt";
 
+	/*Fecha f;
+	string fecha = "13/3/17";
+	f.ano = stoi(fecha.substr(0,2));
+	f.mes = stoi(fecha.substr(3,2));
+	f.dia = stoi(fecha.substr(5,2));
+	cout << f.ano << '/' << f.mes << '/' << f.dia << endl;*/
+
 	cargarCoches(file, listaC);
 	leerAlquileres(file2, listaA, listaC);
 	//ordenarAlquileres(listaA);
-	/*cout << "punteroCoche: " << buscarCoche(1200, listaC) << endl;
-	cout << "punteroCoche2: " << buscarCoche(1325, listaC) << endl;*/
-	delete[] listaC.cars;
-	delete[] listaA.rents;
+	///*cout << "punteroCoche: " << buscarCoche(1200, listaC) << endl;
+	//cout << "punteroCoche2: " << buscarCoche(1325, listaC) << endl;*/
+	//delete[] listaC.cars;
+	//delete[] listaA.rents;
 
 	system("pause"); // -> módulo utilsSystem
 	return 0;
