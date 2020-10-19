@@ -42,7 +42,7 @@ struct ListaCoches {
 
 struct Alquiler {
 	int codigo = {};
-	string fechaString;
+	//string fechaString;
 	Fecha f;
 	int numDias = {};
 	Coche* puntCoche = {}; //puntero al coche al que hace referencia
@@ -66,7 +66,7 @@ void mostrarListaC(const ListaCoches& listaC)
 	cout << "~ Lista Coches ~" << endl;
 	while (i < listaC.cont - 1)
 	{
-		cout << i << " -> " << listaC.cars[i].codigo << ' ' << listaC.cars[i].precio << ' ' << listaC.cars[i].modelo << endl;
+		cout << i << " -> " << listaC.cars[i].codigo << ' ' << listaC.cars[i].precio << listaC.cars[i].modelo << endl;
 		i++;
 	}
 }
@@ -98,7 +98,9 @@ bool cargarCoches(string const& fichEntrada, ListaCoches& listaC)
 		{
 			input >> listaC.cars[i].codigo;
 			input >> listaC.cars[i].precio;
-			getline(input, listaC.cars[i].modelo); // asi es como se usa :)
+			//char c; // ignora espacio vacios (Ignorado es los metodos de mostrado)
+			//input >> c;
+			getline(input, listaC.cars[i].modelo); // asi es como se usa :) (se recoge con un espacio al inicio)
 			i++;
 			listaC.cont++;
 		}
@@ -143,7 +145,7 @@ bool leerAlquileres(string const& fichEntrada, ListaAlquileres& listaA, ListaCoc
 		{
 			input >> listaA.rents[i].codigo;
 			//input >> listaA.rents[i].fechaString;
-			char c;
+			char c; // ignora las '/'
 			input >> listaA.rents[i].f.ano;
 			input >> c;
 			input >> listaA.rents[i].f.mes;
@@ -160,7 +162,7 @@ bool leerAlquileres(string const& fichEntrada, ListaAlquileres& listaA, ListaCoc
 			i++;
 			listaA.cont++;			
 		}
-		mostrarListaA(listaA);
+		//mostrarListaA(listaA);
 		input.close();
 		return true;
 	} 
@@ -198,18 +200,66 @@ bool Comparador(const Alquiler f1, const Alquiler f2) {
 	       (f1Ano == f2Ano && f1Mes < f2Mes || 
 		   (f1Mes == f2Mes && f1Dia < f2Dia)));
 }*/
-//bool Comparador(const Fecha f1,const Fecha f2) {
-//	//aqui
-//	return (f1.ano < f2.ano ||
-//	       (f1.ano == f2.ano && f1.mes < f2.mes ||
-//		   (f1.mes == f2.mes && f1.dia < f2.dia)));
-//}
+
+// true si f1 es más pequeño / más antiguo. Por tanto f2 es más reciente.
+bool Comparador(const Fecha f1,const Fecha f2) 
+{
+	// Recuerda: AA/MM/DD
+	return (f1.ano < f2.ano ||
+	       (f1.ano == f2.ano && f1.mes < f2.mes ||
+		   (f1.mes == f2.mes && f1.dia < f2.dia)));
+}
 //
 //void ordenarAlquileres(ListaAlquileres& listaA)
 //{
 //	sort(&listaA.rents[0].f, &listaA.rents[listaA.cont].f, Comparador);
 //	mostrarListaA(listaA);
 //}
+
+void ordenarSinSort(ListaAlquileres& listaA)
+{
+	int k = 0;
+	while(k < listaA.cont - 1)
+	{
+		int i = k + 1;
+		while (i < listaA.cont - 1)
+		{
+			if (Comparador(listaA.rents[i].f, listaA.rents[k].f))
+			{
+				Alquiler aux = listaA.rents[k];
+				listaA.rents[k] = listaA.rents[i];
+				listaA.rents[i] = aux;
+			}
+			i++;
+		}
+		k++;
+	}
+	//mostrarListaA(listaA);
+}
+
+void mostrarAlquileres(const ListaAlquileres& listaA)
+{
+	int i = 0;
+	cout << "~ Lista Final de Alquileres ~" << endl;
+	while (i < listaA.cont - 1)
+	{
+		if (listaA.rents[i].puntCoche != nullptr) 
+		{
+			cout << listaA.rents[i].f.toString()
+				<< listaA.rents[i].puntCoche->modelo << " "
+				<< listaA.rents[i].numDias << " dia(s) por "
+				<< listaA.rents[i].puntCoche->precio * listaA.rents[i].numDias
+				<< " euros" << endl;
+		}
+		else
+		{
+			cout << listaA.rents[i].f.toString() << " "
+				<< "ERROR: Modelo Inexistente"
+				<< " euros" << endl;
+		}
+		i++;
+	}
+}
 
 #pragma endregion
 
@@ -229,6 +279,8 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 
 	cargarCoches(file, listaC);
 	leerAlquileres(file2, listaA, listaC);
+	ordenarSinSort(listaA);
+	mostrarAlquileres(listaA);
 	//ordenarAlquileres(listaA);
 	///*cout << "punteroCoche: " << buscarCoche(1200, listaC) << endl;
 	//cout << "punteroCoche2: " << buscarCoche(1325, listaC) << endl;*/
