@@ -167,11 +167,22 @@ bool Comparador(const Fecha f1,const Fecha f2)
 		   (f1.mes == f2.mes && f1.dia < f2.dia)));
 }
 
-//void ordenarAlquileres(ListaAlquileres& listaA)
-//{
-//	sort(&listaA.rents[0].f, &listaA.rents[listaA.cont].f, Comparador);
-//	mostrarListaA(listaA);
-//}
+// true si f1 es más pequeño / más antiguo. Por tanto f2 es más reciente.
+bool CompAlquileres(const Alquiler A1,const Alquiler A2) 
+{
+	Fecha f1 = A1.f;
+	Fecha f2 = A2.f;
+	// Recuerda: AA/MM/DD
+	return (f1.ano < f2.ano ||
+	       (f1.ano == f2.ano && f1.mes < f2.mes ||
+		   (f1.mes == f2.mes && f1.dia < f2.dia)));
+}
+
+void ordenarAlquileres(ListaAlquileres& listaA)
+{
+	sort(&listaA.rents[0], &listaA.rents[listaA.cont - 1], CompAlquileres);
+	mostrarListaA(listaA);
+}
 
 void ordenarSinSort(ListaAlquileres& listaA)
 {
@@ -229,7 +240,8 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 
 	cargarCoches(file, listaC);
 	leerAlquileres(file2, listaA, listaC);
-	ordenarSinSort(listaA);
+	//ordenarSinSort(listaA);
+	ordenarAlquileres(listaA);
 	mostrarAlquileres(listaA);
 
 	delete[] listaC.cars;
