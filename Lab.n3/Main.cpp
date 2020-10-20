@@ -4,17 +4,22 @@
 
 // Clases anidadas:
 #include "Date.h"
+#include "Coche.h"
+#include "ListaCoches.h"
 
 using namespace std; /* para nombrar sin cualificar con std:: */
 
 #pragma region METODOS
 
 int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
-{
-	//ListaCoches listaC;
+{	
+	ListaCoches listaC = ListaCoches();
 	//ListaAlquileres listaA;
+
 	string file = "coches.txt";
 	string file2 = "rent.txt";
+
+	listaC.cargarCoches(file);
 
 	// MENU PRINCIPAL:
 	cout << "~ MENU PRINCIPAL ~" << endl << endl
@@ -28,11 +33,14 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 	int opt;
 	cout << "Entrada usuario: ";
 	cin >> opt;
+	cout << endl;
 	--opt; // ¿es igual que opt--?
+
 	switch (opt)
 	{
 	case 0:
-		cout << "Mostrar Coches" << endl;
+		//cout << "Mostrar Coches" << endl;
+		listaC.print();
 		break;
 	case 1:
 		cout << "Mostrar Alquileres" << endl;
@@ -50,13 +58,7 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 		break;
 	}
 
-	//cargarCoches(file, listaC);
-	//leerAlquileres(file2, listaA, listaC);
-	//ordenarSinSort(listaA);
-	//ordenarAlquileres(listaA);
-	//mostrarAlquileres(listaA);
-
-	//delete[] listaC.cars;
+	listaC.del();
 	//delete[] listaA.rents;
 
 	system("pause"); // -> módulo utilsSystem
