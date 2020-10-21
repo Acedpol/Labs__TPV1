@@ -13,7 +13,8 @@ private:
 public:
 	Coche() : codigo(0), precio(0), modelo("No declarado") {};
 	Coche(int c, int p, string m) : codigo(c), precio(p), modelo(m) {};
-	void print() const;	
+	void print() const;
 	bool operator==(const int code);
+	istream& operator>>(istream& in);
 };
 

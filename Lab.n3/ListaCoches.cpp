@@ -12,7 +12,7 @@ void ListaCoches::cargarCoches(string const& fichEntrada)
 	if (input.is_open()) //throw(Error(“No se encuentra el fichero”)); -> esto sobra, con el if salva la excepcion
 	{
 		input >> tam;
-		tam += 10;
+		//tam += 10;
 		cars = new Coche[tam];
 		int i = 0;
 		while (!input.fail() && i < tam)
@@ -22,9 +22,19 @@ void ListaCoches::cargarCoches(string const& fichEntrada)
 			input >> c;
 			input >> p;
 			getline(input, m);
-			cars[i] = Coche(c, p, m);
-			i++;
-			cont++;
+			if (!input.fail())
+			{
+				cars[i] = Coche(c, p, m);
+				i++;
+				cont++;
+			}
+			
+			/*cars[i] >> input;
+			if (!input.fail())
+			{
+				i++;
+				cont++;
+			}*/
 		}
 		input.close();
 	}
@@ -35,7 +45,7 @@ void ListaCoches::cargarCoches(string const& fichEntrada)
 	}
 }
 
-Coche* ListaCoches::buscarCoche(int code, const ListaCoches& listaC)
+Coche* ListaCoches::buscarCoche(int code)
 {
 	Coche* c = nullptr;
 	int i = 0;
@@ -50,12 +60,39 @@ Coche* ListaCoches::buscarCoche(int code, const ListaCoches& listaC)
     return nullptr;
 }
 
+void ListaCoches::añadirCoche()
+{
+	if (cont < tam)
+	{
+		Coche car;	
+		car >> cin;
+		cars[cont] = car;
+		cont++;
+	}
+	else // Redimensiona la lista
+	{
+		//cout << "La lista está completa. No hay hueco disponible." << endl;
+		tam += 10;
+		Coche* aux = new Coche[tam];
+		int i = 0;
+		while (i < cont)
+		{
+			aux[i] = cars[i];
+			i++;
+		}
+		delete[] cars;
+		cars = aux;
+		añadirCoche();
+	}
+}
+
 void ListaCoches::print() const
 {
 	int i = 0;
 	cout << "~ Lista Coches ~" << endl;
-	while (i < cont - 1)
+	while (i < cont)
 	{
+		cout << i << " -> ";
 		cars[i].print();
 		i++;
 	}

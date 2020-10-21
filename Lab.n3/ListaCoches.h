@@ -12,7 +12,8 @@ private:
 public:
 	ListaCoches() : cars(nullptr), tam(0), cont(0) {};
 	void cargarCoches(string const& fichEntrada);
-	Coche* buscarCoche(int code, const ListaCoches& listaC);
+	Coche* buscarCoche(int code);
+	void añadirCoche();
 	void print() const;
 	void del() { delete[] cars; };
 };

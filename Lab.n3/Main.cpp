@@ -30,32 +30,41 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 		<< " 4 -> Agregar Alquiler " << endl
 		<< " 5 -> Salir del Programa " << endl << endl;
 
-	int opt;
-	cout << "Entrada usuario: ";
-	cin >> opt;
-	cout << endl;
-	--opt; // ¿es igual que opt--?
+	
 
-	switch (opt)
+	bool exit = false;
+	while (!exit)
 	{
-	case 0:
-		//cout << "Mostrar Coches" << endl;
-		listaC.print();
-		break;
-	case 1:
-		cout << "Mostrar Alquileres" << endl;
-		break;
-	case 2:
-		cout << "Agregar Coche" << endl;
-		break;
-	case 3:
-		cout << "Agregar Alquiler" << endl;
-		break;
-	case 4:
-		cout << "Salir del Programa" << endl;
-		break;
-	default:
-		break;
+		int opt;
+		cout << "Entrada usuario: ";
+		cin >> opt;
+		cout << endl;
+		--opt; // ¿es igual que opt--?
+
+		switch (opt)
+		{
+		case 0:
+			//cout << "Mostrar Coches" << endl;
+			listaC.print();
+			break;
+		case 1:
+			cout << "Mostrar Alquileres" << endl;
+			break;
+		case 2:
+			//cout << "Agregar Coche" << endl;
+			listaC.añadirCoche();
+			break;
+		case 3:
+			cout << "Agregar Alquiler" << endl;
+			break;
+		case 4:
+			cout << "Salir del Programa" << endl;
+			exit = true;
+			break;
+		default:
+			break;
+		}
+		cout << endl;
 	}
 
 	listaC.del();
