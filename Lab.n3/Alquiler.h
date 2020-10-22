@@ -1,5 +1,24 @@
 #pragma once
+#include <string>
+#include "Date.h"
+#include "Coche.h"
+
+
+using namespace std; // para poder declarar string's
+
 class Alquiler
 {
+private:
+	int codigoCoche;
+	Coche* coche;
+	Date fecha;
+	int dias;		//nº de dias
+
+public:
+	Alquiler() : codigoCoche(0), coche(nullptr), fecha(), dias(0) {};
+	Alquiler(int cod, Coche* c, Date f, int d) : codigoCoche(cod), coche(c), fecha(f), dias(d) {};
+	void print() const;
+	//bool operator==(const int code);	NO HACE FALTA
+	istream& operator>>(istream& in);
 };
 

@@ -6,6 +6,8 @@
 #include "Date.h"
 #include "Coche.h"
 #include "ListaCoches.h"
+#include "Alquiler.h"
+#include "ListaAlquileres.h"
 
 using namespace std; /* para nombrar sin cualificar con std:: */
 
@@ -19,7 +21,9 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 	string file = "coches.txt";
 	string file2 = "rent.txt";
 
+	//estos métodos devuelven true o false o hay que pillar la excepción
 	listaC.cargarCoches(file);
+	//listaA.leerAlquileres(file2);
 
 	// MENU PRINCIPAL:
 	cout << "~ MENU PRINCIPAL ~" << endl << endl
