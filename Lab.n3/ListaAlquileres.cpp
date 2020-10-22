@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "ListaAlquileres.h"
-bool ListaAlquileres::leerAlquileres(string const& fichEntrada)
+bool ListaAlquileres::leerAlquileres(string const& fichEntrada, const ListaCoches& listaC) 
 {
 	ifstream input;
 	input.open(fichEntrada);
@@ -16,12 +16,14 @@ bool ListaAlquileres::leerAlquileres(string const& fichEntrada)
 		{
 			int cod, dias;
 			Date f;
+			Coche* puntcoche;
 			input >> cod;
 			input >> f;
 			input >> dias;
 
 			if (!input.fail()) {
-				rents[i] = Alquiler(cod, nullptr, f,dias);
+				puntcoche = listaC.buscarCoche(cod);
+				rents[i] = Alquiler(cod, puntcoche, f,dias);
 				i++;
 				cont++;
 			}

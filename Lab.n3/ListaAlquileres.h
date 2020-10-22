@@ -1,8 +1,9 @@
 #pragma once
 
 #include <string>
-#include "Alquiler.h"
 #include <algorithm> // sort
+#include "Alquiler.h"
+#include "ListaCoches.h"
 
 class ListaAlquileres
 {
@@ -15,7 +16,7 @@ private:
 
 public:
 	ListaAlquileres() : rents(nullptr), tam(0), cont(0) {};
-	bool leerAlquileres(string const& fichEntrada) ;
+	bool leerAlquileres(string const& fichEntrada, const ListaCoches& listaC) ;
 	void ordenarAlquileres() ;
 	void añadirAlquiler();
 	void print() const;

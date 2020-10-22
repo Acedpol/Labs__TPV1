@@ -45,11 +45,11 @@ void ListaCoches::cargarCoches(string const& fichEntrada)
 	}
 }
 
-Coche* ListaCoches::buscarCoche(int code)
+Coche* ListaCoches::buscarCoche(int code) const
 {
 	Coche* c = nullptr;
 	int i = 0;
-	while (i < tam)
+	while (i < tam && c == nullptr)		//deberia ser un for
 	{
 		if (cars[i] == code)
 		{
@@ -57,7 +57,7 @@ Coche* ListaCoches::buscarCoche(int code)
 		}
 		i++;
 	}
-    return nullptr;
+    return c;
 }
 
 void ListaCoches::añadirCoche()

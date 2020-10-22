@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 
 	//estos métodos devuelven true o false o hay que pillar la excepción
 	listaC.cargarCoches(file);
-	if(!listaA.leerAlquileres(file2))
+	if(!listaA.leerAlquileres(file2, listaC))
 	{	cout << "ERROR AL LEER ALQUILERES";	}
 
 	// MENU PRINCIPAL:
