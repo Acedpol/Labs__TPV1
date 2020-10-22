@@ -3,5 +3,5 @@
 
 void Alquiler::print() const
 {
-	cout << codigoCoche << ' ' << fecha << '*' << dias << endl;
+	cout << codigoCoche << ' ' << fecha << ' ' << dias << endl;
 }

@@ -16,14 +16,15 @@ using namespace std; /* para nombrar sin cualificar con std:: */
 int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 {	
 	ListaCoches listaC = ListaCoches();
-	//ListaAlquileres listaA;
+	ListaAlquileres listaA = ListaAlquileres();
 
 	string file = "coches.txt";
 	string file2 = "rent.txt";
 
 	//estos métodos devuelven true o false o hay que pillar la excepción
 	listaC.cargarCoches(file);
-	//listaA.leerAlquileres(file2);
+	if(!listaA.leerAlquileres(file2))
+	{	cout << "ERROR AL LEER ALQUILERES";	}
 
 	// MENU PRINCIPAL:
 	cout << "~ MENU PRINCIPAL ~" << endl << endl
@@ -32,7 +33,8 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 		<< " 2 -> Mostrar Alquileres " << endl
 		<< " 3 -> Agregar Coche " << endl
 		<< " 4 -> Agregar Alquiler " << endl
-		<< " 5 -> Salir del Programa " << endl << endl;
+		<< " 5 -> Ordenar Alquileres" << endl
+		<< " 6 -> Salir del Programa " << endl << endl;
 
 	
 
@@ -52,7 +54,8 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 			listaC.print();
 			break;
 		case 1:
-			cout << "Mostrar Alquileres" << endl;
+			//cout << "Mostrar Alquileres" << endl;
+			listaA.print();
 			break;
 		case 2:
 			//cout << "Agregar Coche" << endl;
@@ -62,6 +65,10 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 			cout << "Agregar Alquiler" << endl;
 			break;
 		case 4:
+			cout << "Alquileres ordenados" << endl;
+			listaA.ordenarAlquileres();
+			break;
+		case 5:
 			cout << "Salir del Programa" << endl;
 			exit = true;
 			break;
