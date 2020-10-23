@@ -14,7 +14,7 @@ using namespace std; /* para nombrar sin cualificar con std:: */
 #pragma region METODOS
 
 int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
-{	
+{
 	ListaCoches listaC = ListaCoches();
 	ListaAlquileres listaA = ListaAlquileres();
 
@@ -22,20 +22,20 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 	string file2 = "rent.txt";
 
 	//estos métodos devuelven true o false o hay que pillar la excepción
-	if(!listaC.cargarCoches(file)
+	if (!listaC.cargarCoches(file))
 	{
 		cout << "ERROR AL LEER ALQUILERES";
 	}
-	if(!listaA.leerAlquileres(file2, listaC))
-	{	
-		cout << "ERROR AL LEER ALQUILERES";	
+	if (!listaA.leerAlquileres(file2, listaC))
+	{
+		cout << "ERROR AL LEER ALQUILERES";
 	}
-	/*try 
+	/*try
 	{
 		listaC.cargarCoches(file);
 		listaA.leerAlquileres(file2, listaC);
 	}
-	catch (Error e) 
+	catch (Error e)
 	{
 		cout << e << endl;
 	}*/
@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 		<< " 6 -> Mostrar Lista Final de Alquileres" << endl
 		<< " 7 -> Salir del Programa " << endl << endl;
 
-	
+
 
 	bool exit = false;
 	while (!exit)

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void ListaCoches::cargarCoches(string const& fichEntrada)
+bool ListaCoches::cargarCoches(string const& fichEntrada)
 {
 	ifstream input;
 	input.open(fichEntrada);
@@ -37,11 +37,13 @@ void ListaCoches::cargarCoches(string const& fichEntrada)
 			}*/
 		}
 		input.close();
+		return true;
 	}
 	else
 	{
 		input.close();
 		cout << "¡No se ha podido cargar el fichero!" << endl;
+		return false;
 	}
 }
 
