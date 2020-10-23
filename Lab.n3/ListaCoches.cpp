@@ -64,17 +64,10 @@ Coche* ListaCoches::buscarCoche(int code) const
 
 void ListaCoches::anadirCoche()
 {
-	if (cont < tam)
-	{
-		Coche car;	
-		car >> cin;
-		cars[cont] = car;
-		cont++;
-	}
-	else // Redimensiona la lista
+	if (cont >= tam) // Redimensiona la lista	 
 	{
 		//cout << "La lista está completa. No hay hueco disponible." << endl;
-		tam += 10;
+		tam *= 2;
 		Coche* aux = new Coche[tam];
 		int i = 0;
 		while (i < cont)
@@ -84,8 +77,12 @@ void ListaCoches::anadirCoche()
 		}
 		delete[] cars;
 		cars = aux;
-		anadirCoche();
+		//anadirCoche();		
 	}
+	Coche car;
+	car >> cin;
+	cars[cont] = car;
+	cont++;
 }
 
 void ListaCoches::print() const

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 #include "ListaAlquileres.h"
 
 bool ListaAlquileres::leerAlquileres(string const& fichEntrada, const ListaCoches& listaC)
@@ -39,9 +40,9 @@ bool ListaAlquileres::leerAlquileres(string const& fichEntrada, const ListaCoche
 	}
 }
 
-bool ListaAlquileres::CompAlquileres(const Alquiler A1,const Alquiler A2)
+bool CompAlquileres(const Alquiler A1, const Alquiler A2)
 {
-	// Recuerda: AA/MM/DD
+	// Recuerda: AA/MM/DD -> da igual porque ni funciona
 	Date f1 = A1.getFecha();
 	Date f2 = A2.getFecha();
 	return f1 < f2;
@@ -50,21 +51,15 @@ bool ListaAlquileres::CompAlquileres(const Alquiler A1,const Alquiler A2)
 void ListaAlquileres::ordenarAlquileres()
 {
 	//sort(&rents[0], &rents[cont - 1], CompAlquileres);
+	sort(&rents[0], &rents[cont], CompAlquileres);
 }
 
 void ListaAlquileres::anadirAlquiler()
 {
-	if (cont < tam)
-	{
-		Alquiler rent;
-		rent >> cin;
-		rents[cont] = rent;
-		cont++;
-	}
-	else // Redimensiona la lista
+	if (cont >= tam) // Redimensiona la lista
 	{
 		//cout << "La lista est� completa. No hay hueco disponible." << endl;
-		tam += 10;
+		tam *= 2;
 		Alquiler* aux = new Alquiler[tam];
 		int i = 0;
 		while (i < cont)
@@ -74,8 +69,12 @@ void ListaAlquileres::anadirAlquiler()
 		}
 		delete[] rents;
 		rents = aux;
-		anadirAlquiler();
+		//anadirAlquiler();
 	}
+	Alquiler rent;
+	rent >> cin;
+	rents[cont] = rent;
+	cont++;
 }
 
 void ListaAlquileres::mostrarAlquileres() const

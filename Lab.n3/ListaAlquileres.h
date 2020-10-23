@@ -11,7 +11,7 @@ private:
 	Alquiler* rents;
 	int tam;
 	int cont;
-	bool CompAlquileres(const Alquiler A1, const Alquiler A2);
+	
 
 public:
 	ListaAlquileres() : rents(nullptr), tam(0), cont(0) {};
@@ -23,3 +23,4 @@ public:
 	void del() { delete[] rents; };
 };
 
+bool CompAlquileres(const Alquiler A1, const Alquiler A2); // funcion externa
