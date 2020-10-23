@@ -37,8 +37,9 @@ void Date::operator+=(int n){
 }
 
 bool Date::operator<(const Date& date) const{
-	return (year < date.year ||
-	       (year == date.year && (month < date.month || (month == date.month && day < date.day))));
+	return	(year < date.year ||
+			(year == date.year && (month < date.month || 
+			(month == date.month && day < date.day))));
 }
 
 

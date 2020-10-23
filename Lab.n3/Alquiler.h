@@ -20,6 +20,5 @@ public:
 	Date getFecha() const { return fecha; } ;
 	void print() const;
 	istream& operator>>(istream& in);
-
 };
 

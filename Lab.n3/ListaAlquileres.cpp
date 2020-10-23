@@ -1,12 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include "ListaAlquileres.h"
-bool ListaAlquileres::leerAlquileres(string const& fichEntrada, const ListaCoches& listaC) 
+
+bool ListaAlquileres::leerAlquileres(string const& fichEntrada, const ListaCoches& listaC)
 {
 	ifstream input;
 	input.open(fichEntrada);
 
-	if (input.is_open()) //throw(Error(“No se encuentra el fichero”));
+	if (input.is_open()) //throw(Error(ï¿½No se encuentra el ficheroï¿½));
 	{
 		input >> tam;
 		//tam += 10;
@@ -37,6 +38,7 @@ bool ListaAlquileres::leerAlquileres(string const& fichEntrada, const ListaCoche
 		return false;
 	}
 }
+
 bool ListaAlquileres::CompAlquileres(const Alquiler A1,const Alquiler A2)
 {
 	// Recuerda: AA/MM/DD
@@ -47,7 +49,33 @@ bool ListaAlquileres::CompAlquileres(const Alquiler A1,const Alquiler A2)
 
 void ListaAlquileres::ordenarAlquileres()
 {
-	sort(&rents[0], &rents[cont - 1], CompAlquileres);
+	//sort(&rents[0], &rents[cont - 1], CompAlquileres);
+}
+
+void ListaAlquileres::aï¿½adirAlquiler()
+{
+	if (cont < tam)
+	{
+		Alquiler rent;
+		rent >> cin;
+		rents[cont] = rent;
+		cont++;
+	}
+	else // Redimensiona la lista
+	{
+		//cout << "La lista estï¿½ completa. No hay hueco disponible." << endl;
+		tam += 10;
+		Alquiler* aux = new Alquiler[tam];
+		int i = 0;
+		while (i < cont)
+		{
+			aux[i] = rents[i];
+			i++;
+		}
+		delete[] rents;
+		rents = aux;
+		aï¿½adirAlquiler();
+	}
 }
 
 void ListaAlquileres::mostrarAlquileres() 

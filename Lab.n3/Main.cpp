@@ -62,7 +62,8 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 			listaC.añadirCoche();
 			break;
 		case 3:
-			cout << "Agregar Alquiler" << endl;
+			//cout << "Agregar Alquiler" << endl;
+			listaA.añadirAlquiler();
 			break;
 		case 4:
 			cout << "Alquileres ordenados" << endl;
