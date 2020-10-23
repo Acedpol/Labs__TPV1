@@ -16,5 +16,7 @@ public:
 	void print() const;
 	bool operator==(const int code);
 	istream& operator>>(istream& in);
+	int getPrecio() { return precio; };
+	string getModelo() { return modelo; };
 };
 

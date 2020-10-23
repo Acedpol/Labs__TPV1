@@ -22,9 +22,23 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 	string file2 = "rent.txt";
 
 	//estos métodos devuelven true o false o hay que pillar la excepción
-	listaC.cargarCoches(file);
+	if(!listaC.cargarCoches(file)
+	{
+		cout << "ERROR AL LEER ALQUILERES";
+	}
 	if(!listaA.leerAlquileres(file2, listaC))
-	{	cout << "ERROR AL LEER ALQUILERES";	}
+	{	
+		cout << "ERROR AL LEER ALQUILERES";	
+	}
+	/*try 
+	{
+		listaC.cargarCoches(file);
+		listaA.leerAlquileres(file2, listaC);
+	}
+	catch (Error e) 
+	{
+		cout << e << endl;
+	}*/
 
 	// MENU PRINCIPAL:
 	cout << "~ MENU PRINCIPAL ~" << endl << endl
@@ -34,7 +48,8 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 		<< " 3 -> Agregar Coche " << endl
 		<< " 4 -> Agregar Alquiler " << endl
 		<< " 5 -> Ordenar Alquileres" << endl
-		<< " 6 -> Salir del Programa " << endl << endl;
+		<< " 6 -> Mostrar Lista Final de Alquileres" << endl
+		<< " 7 -> Salir del Programa " << endl << endl;
 
 	
 
@@ -70,6 +85,10 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 			listaA.ordenarAlquileres();
 			break;
 		case 5:
+			//cout << "Mostrar Lista Final Alquileres" << endl;
+			listaA.mostrarAlquileres();
+			break;
+		case 6:
 			cout << "Salir del Programa" << endl;
 			exit = true;
 			break;

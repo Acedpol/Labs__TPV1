@@ -18,7 +18,7 @@ public:
 	bool leerAlquileres(string const& fichEntrada, const ListaCoches& listaC) ;
 	void ordenarAlquileres() ;
 	void anadirAlquiler();
-	void mostrarAlquileres();
+	void mostrarAlquileres() const;
 	void print() const;
 	void del() { delete[] rents; };
 };

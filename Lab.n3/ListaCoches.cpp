@@ -9,7 +9,7 @@ void ListaCoches::cargarCoches(string const& fichEntrada)
 	ifstream input;
 	input.open(fichEntrada);
 
-	if (input.is_open()) //throw(Error(“No se encuentra el fichero”)); -> esto sobra, con el if salva la excepcion
+	if (input.is_open()) //throw(Error(“No se encuentra el fichero”)); 
 	{
 		input >> tam;
 		//tam += 10;

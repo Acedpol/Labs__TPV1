@@ -78,14 +78,14 @@ void ListaAlquileres::anadirAlquiler()
 	}
 }
 
-void ListaAlquileres::mostrarAlquileres() 
+void ListaAlquileres::mostrarAlquileres() const
 {
 	int i = 0;
-	cout << "~ Lista Alquileres ~" << endl;
+	cout << "~ Lista Final de Alquileres ~" << endl;
 	while (i < cont)
 	{
 		cout << i << " -> ";
-		rents[i].print();
+		rents[i].mostrarAlquiler();
 		i++;
 	}
 }

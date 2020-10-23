@@ -6,6 +6,24 @@ void Alquiler::print() const
 	cout << codigoCoche << ' ' << fecha << ' ' << dias << endl;
 }
 
+void Alquiler::mostrarAlquiler() const
+{
+	if (coche != nullptr)
+	{
+		fecha.print();
+		cout << coche->getModelo() << " "
+			<< dias << " dia(s) por "
+			<< coche->getPrecio() * dias
+			<< " euros" << endl;
+	}
+	else
+	{
+		fecha.print();
+		cout << " ERROR: Modelo Inexistente"
+			<< " euros" << endl;
+	}
+}
+
 istream& Alquiler::operator>>(istream& in)
 {
 	cout << "Codigo Coche: ";

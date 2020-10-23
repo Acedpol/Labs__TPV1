@@ -19,6 +19,7 @@ public:
 	Alquiler(int cod, Coche* c, Date f, int d) : codigoCoche(cod), coche(c), fecha(f), dias(d) {};
 	Date getFecha() const { return fecha; } ;
 	void print() const;
+	void mostrarAlquiler() const;
 	istream& operator>>(istream& in);
 };
 
