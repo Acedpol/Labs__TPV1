@@ -60,7 +60,7 @@ Coche* ListaCoches::buscarCoche(int code) const
     return c;
 }
 
-void ListaCoches::añadirCoche()
+void ListaCoches::anadirCoche()
 {
 	if (cont < tam)
 	{
@@ -82,7 +82,7 @@ void ListaCoches::añadirCoche()
 		}
 		delete[] cars;
 		cars = aux;
-		añadirCoche();
+		anadirCoche();
 	}
 }
 

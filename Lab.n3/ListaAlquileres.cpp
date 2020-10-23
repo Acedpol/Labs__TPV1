@@ -52,7 +52,7 @@ void ListaAlquileres::ordenarAlquileres()
 	//sort(&rents[0], &rents[cont - 1], CompAlquileres);
 }
 
-void ListaAlquileres::a�adirAlquiler()
+void ListaAlquileres::anadirAlquiler()
 {
 	if (cont < tam)
 	{
@@ -74,7 +74,7 @@ void ListaAlquileres::a�adirAlquiler()
 		}
 		delete[] rents;
 		rents = aux;
-		a�adirAlquiler();
+		anadirAlquiler();
 	}
 }
 
