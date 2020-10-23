@@ -94,11 +94,11 @@ bool Date::correctDate() const {
 
 istream& operator>>(istream& in, Date& d){
 	char c;
-	in >> d.day >> c >> d.month >> c >> d.year;
+	in >> d.year >> c >> d.month >> c >> d.day;
 	return in;
 }
 
 ostream& operator<<(ostream& out, const Date& d){
-	out << d.day << "/" << d.month << "/" << d.year;
+	out << d.year << "/" << d.month << "/" << d.day;
 	return out;
 }

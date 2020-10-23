@@ -37,7 +37,7 @@ bool ListaAlquileres::leerAlquileres(string const& fichEntrada, const ListaCoche
 		return false;
 	}
 }
-bool CompAlquileres(const Alquiler A1,const Alquiler A2)
+bool ListaAlquileres::CompAlquileres(const Alquiler A1,const Alquiler A2)
 {
 	// Recuerda: AA/MM/DD
 	Date f1 = A1.getFecha();
@@ -48,6 +48,18 @@ bool CompAlquileres(const Alquiler A1,const Alquiler A2)
 void ListaAlquileres::ordenarAlquileres()
 {
 	sort(&rents[0], &rents[cont - 1], CompAlquileres);
+}
+
+void ListaAlquileres::mostrarAlquileres() 
+{
+	int i = 0;
+	cout << "~ Lista Alquileres ~" << endl;
+	while (i < cont)
+	{
+		cout << i << " -> ";
+		rents[i].print();
+		i++;
+	}
 }
 
 void ListaAlquileres::print() const
