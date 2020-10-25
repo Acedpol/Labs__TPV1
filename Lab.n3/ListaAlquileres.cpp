@@ -42,7 +42,6 @@ bool ListaAlquileres::leerAlquileres(string const& fichEntrada, const ListaCoche
 
 bool CompAlquileres(const Alquiler A1, const Alquiler A2)
 {
-	// Recuerda: AA/MM/DD -> da igual porque ni funciona : CORREGIDO
 	// Es como debería ser: DD/MM/AA
 	Date f1 = A1.getFecha();
 	Date f2 = A2.getFecha();

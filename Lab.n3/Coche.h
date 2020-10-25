@@ -17,20 +17,9 @@ public:
 	int getPrecio() { return precio; };
 	int getCodigo() { return codigo; };
 	string getModelo() { return modelo; };
-	//bool operator==(const int code);
-	//istream& operator>>(istream& in);
 	bool operator==(const Coche& c) const;
 	friend istream& operator>>(istream& in, Coche& c);
 };
 
-//bool operator==(const int code, int cod) // Posible función externa
-//{
-//	bool equal = false;
-//	if (codigo == c)
-//	{
-//		equal = true;
-//	}
-//	return equal;
-//}
 istream& operator>>(istream& in, Coche& c); // funcion externa friendly
 
