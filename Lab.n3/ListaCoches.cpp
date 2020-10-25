@@ -53,7 +53,7 @@ Coche* ListaCoches::buscarCoche(int code) const
 	int i = 0;
 	while (i < tam && c == nullptr)		//deberia ser un for
 	{
-		if (cars[i] == code)
+		if (cars[i].getCodigo() == code)
 		{
 			c = &cars[i];
 		}
@@ -80,7 +80,8 @@ void ListaCoches::anadirCoche()
 		//anadirCoche();		
 	}
 	Coche car;
-	car >> cin;
+	//car >> cin;
+	cin >> car;
 	cars[cont] = car;
 	cont++;
 }

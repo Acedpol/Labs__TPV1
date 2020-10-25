@@ -7,13 +7,13 @@ using namespace std;
 
 class Date {
 private:
-	int year;
-	int month;
 	int day;
+	int month;
+	int year;
 
 public:
-	Date() : year(0), month(0), day(0) {};
-	Date(int y, int m, int d);
+	Date() : day(0), month(0), year(0) {};
+	Date(int d, int m, int y);
 	Date(const Date& date);
 	void operator++();
 	void operator+=(int n);

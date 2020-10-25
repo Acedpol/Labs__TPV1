@@ -15,13 +15,15 @@ public:
 	Coche(int c, int p, string m) : codigo(c), precio(p), modelo(m) {};
 	void print() const;	
 	int getPrecio() { return precio; };
+	int getCodigo() { return codigo; };
 	string getModelo() { return modelo; };
-	istream& operator>>(istream& in);
-	bool operator==(const int code);
-	//friend istream& operator>>(istream& in, Coche& c);
+	//bool operator==(const int code);
+	//istream& operator>>(istream& in);
+	bool operator==(const Coche& c) const;
+	friend istream& operator>>(istream& in, Coche& c);
 };
 
-//bool operator==(const int code, int cod) 
+//bool operator==(const int code, int cod) // Posible función externa
 //{
 //	bool equal = false;
 //	if (codigo == c)
@@ -30,5 +32,5 @@ public:
 //	}
 //	return equal;
 //}
-istream& operator>>(istream& in, Coche& c);
+istream& operator>>(istream& in, Coche& c); // funcion externa friendly
 

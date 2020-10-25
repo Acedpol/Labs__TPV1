@@ -20,6 +20,8 @@ public:
 	Date getFecha() const { return fecha; };
 	void print() const;
 	void mostrarAlquiler() const;
-	istream& operator>>(istream& in);
+	//istream& operator>>(istream& in);
+	friend istream& operator>>(istream& in, Alquiler& a);
 };
 
+istream& operator>>(istream& in, Alquiler& a);

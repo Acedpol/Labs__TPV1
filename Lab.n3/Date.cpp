@@ -5,64 +5,55 @@
 using namespace std;
 
 
-Date::Date(int y, int m, int d) 
-{
-	year = y;
-	month = m;
+Date::Date(int d, int m, int y) {
 	day = d;
+	month = m;
+	year = y;
 	if (!correctDate()) throw "Invalid date";
 }
 
-Date::Date(const Date& date)
-{
-	year = date.year;
-	month = date.month;
+Date::Date(const Date& date) {
 	day = date.day;
+	month = date.month;
+	year = date.year;
 }
 
-void Date::operator++()
-{
+void Date::operator++() {
 	// Asumimos que no hay años bisiestos
 	day++;
-	if (day > daysInMonth(month)){
+	if (day > daysInMonth(month)) {
 		day = 1;
 		month++;
-		if (month > 12){
+		if (month > 12) {
 			month = 1;
 			year++;
 		}
 	}
 }
 
-void Date::operator+=(int n)
-{
+void Date::operator+=(int n) {
 	for (int i = 0; i < n; i++)
 		operator++();
 }
 
-bool Date::operator<(const Date& date) const
-{
-	return	(year < date.year ||
-			(year == date.year && (month < date.month || 
-			(month == date.month && day < date.day))));
+bool Date::operator<(const Date& date) const {
+	return (year < date.year ||
+		(year == date.year && (month < date.month || (month == date.month && day < date.day))));
 }
 
 
-int Date::diff(const Date& date) const
-{
+int Date::diff(const Date& date) const {
 	return (calculateValue() - date.calculateValue());
 }
 
-void Date::print() const 
-{
-	cout << year << "/" << month << "/" << day;
+void Date::print() const {
+	cout << day << "/" << month << "/" << year;
 }
 
 
 // Private operations
 
-int Date::calculateValue() const
-{
+int Date::calculateValue() const {
 	// Asumimos que no hay años bisiestos
 	int v = 0;
 	v += 365 * (year - 1);
@@ -73,28 +64,26 @@ int Date::calculateValue() const
 	return v;
 }
 
-int Date::daysInMonth(int m) const 
-{
+int Date::daysInMonth(int m) const {
 	// Asumimos que no hay años bisiestos
 	int numDays = 0;
 	switch (m) {
-		case 1:case 3:case 5:case 7:case 8:case 10:case 12:
-			numDays = 31;
-			break;
-		case 4:case 6:case 9:case 11:
-			numDays = 30;
-			break;
-		case 2:
-			numDays = 28;
-			break;
-		default:
-			numDays = 0;
+	case 1:case 3:case 5:case 7:case 8:case 10:case 12:
+		numDays = 31;
+		break;
+	case 4:case 6:case 9:case 11:
+		numDays = 30;
+		break;
+	case 2:
+		numDays = 28;
+		break;
+	default:
+		numDays = 0;
 	}
 	return numDays;
 }
 
-bool Date::correctDate() const 
-{
+bool Date::correctDate() const {
 	bool correct;
 	if ((year <= 0) || (month < 1) || (month > 12) || (day < 1) || (day > daysInMonth(month)))
 		correct = false;
@@ -103,15 +92,13 @@ bool Date::correctDate() const
 	return correct;
 }
 
-istream& operator>>(istream& in, Date& d)
-{
+istream& operator>>(istream& in, Date& d) {
 	char c;
-	in >> d.year >> c >> d.month >> c >> d.day;
+	in >> d.day >> c >> d.month >> c >> d.year;
 	return in;
 }
 
-ostream& operator<<(ostream& out, const Date& d)
-{
-	out << d.year << "/" << d.month << "/" << d.day;
+ostream& operator<<(ostream& out, const Date& d) {
+	out << d.day << "/" << d.month << "/" << d.year;
 	return out;
 }

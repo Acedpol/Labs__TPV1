@@ -24,13 +24,25 @@ void Alquiler::mostrarAlquiler() const
 	}
 }
 
-istream& Alquiler::operator>>(istream& in)
+//istream& Alquiler::operator>>(istream& in)
+//{
+//	cout << "Codigo Coche: ";
+//	in >> codigoCoche;
+//	cout << "Fecha AA/MM/DD: ";
+//	in >> fecha;
+//	cout << "Dias: ";
+//	in >> dias;
+//	return in;
+//}
+
+// *Al profesor no le mola que escriba por pantalla mientras pido datos*
+istream& operator>>(istream& in, Alquiler& a)
 {
 	cout << "Codigo Coche: ";
-	in >> codigoCoche;
+	in >> a.codigoCoche;
 	cout << "Fecha AA/MM/DD: ";
-	in >> fecha;
+	in >> a.fecha;
 	cout << "Dias: ";
-	in >> dias;
+	in >> a.dias;
 	return in;
 }
