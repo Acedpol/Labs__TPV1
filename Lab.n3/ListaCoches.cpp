@@ -9,7 +9,7 @@ bool ListaCoches::cargarCoches(string const& fichEntrada)
 	ifstream input;
 	input.open(fichEntrada);
 
-	if (input.is_open()) //throw (exception("No se encuentra el fichero"));
+	if (input.is_open())
 	{
 		input >> tam;
 		//tam += 10;
@@ -28,13 +28,6 @@ bool ListaCoches::cargarCoches(string const& fichEntrada)
 				i++;
 				cont++;
 			}
-
-			/*cars[i] >> input;
-			if (!input.fail())
-			{
-				i++;
-				cont++;
-			}*/
 		}
 		input.close();
 		return true;
@@ -66,7 +59,6 @@ void ListaCoches::anadirCoche()
 {
 	if (cont >= tam) // Redimensiona la lista	 
 	{
-		//cout << "La lista está completa. No hay hueco disponible." << endl;
 		tam *= 2;
 		Coche** aux = new Coche*[tam];
 		int i = 0;
@@ -76,8 +68,7 @@ void ListaCoches::anadirCoche()
 			i++;
 		}
 		delete[] cars;
-		cars = aux;
-		//anadirCoche();		
+		cars = aux;	
 	}
 	Coche* car = new Coche();
 	cin >> car;

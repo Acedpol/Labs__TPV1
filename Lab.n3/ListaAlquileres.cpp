@@ -33,7 +33,7 @@ bool ListaAlquileres::leerAlquileres(string const& fichEntrada, const ListaCoche
 		input.close();
 		return true;
 	}
-	else //throw "No se encuentra el fichero";
+	else
 	{
 		input.close();
 		cout << "¡No se ha podido cargar el fichero de Coches!" << endl;
@@ -51,7 +51,6 @@ bool CompAlquileres(const Alquiler A1, const Alquiler A2)
 
 void ListaAlquileres::ordenarAlquileres()
 {
-	//sort(&rents[0], &rents[cont - 1], CompAlquileres);
 	sort(&rents[0], &rents[cont], CompAlquileres);
 }
 
@@ -59,7 +58,6 @@ void ListaAlquileres::anadirAlquiler(const ListaCoches& listaC)
 {
 	if (cont >= tam) // Redimensiona la lista
 	{
-		//cout << "La lista est� completa. No hay hueco disponible." << endl;
 		tam *= 2;
 		Alquiler* aux = new Alquiler[tam];
 		int i = 0;
@@ -70,7 +68,6 @@ void ListaAlquileres::anadirAlquiler(const ListaCoches& listaC)
 		}
 		delete[] rents;
 		rents = aux;
-		//anadirAlquiler();
 	}
 	Alquiler rent;
 	//rent >> cin;

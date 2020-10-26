@@ -18,7 +18,8 @@ Date::Date(const Date& date) {
 	year = date.year;
 }
 
-void Date::operator++() {
+void Date::operator++() 
+{
 	// Asumimos que no hay años bisiestos
 	day++;
 	if (day > daysInMonth(month)) {

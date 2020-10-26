@@ -22,5 +22,4 @@ public:
 };
 
 istream& operator>>(istream& in, Coche* c); // funcion externa friendly
-//istream& operator>>(istream& in, Coche& c); // funcion externa friendly
 
