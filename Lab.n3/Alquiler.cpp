@@ -27,6 +27,7 @@ void Alquiler::mostrarAlquiler() const
 // *Al profesor no le mola que escriba por pantalla mientras pido datos*
 istream& operator>>(istream& in, Alquiler& a)
 {
+	cout << "~ ALQUILER NUEVO ~" << endl;
 	cout << "Codigo Coche: ";
 	in >> a.codigoCoche;
 	cout << "Fecha AA/MM/DD: ";

@@ -18,6 +18,8 @@ public:
 	Alquiler() : codigoCoche(0), coche(nullptr), fecha(), dias(0) {};
 	Alquiler(int cod, Coche* c, Date f, int d) : codigoCoche(cod), coche(c), fecha(f), dias(d) {};
 	Date getFecha() const { return fecha; };
+	int getCodeCar() const { return codigoCoche; };
+	void setPointerCar(Coche* car) { coche = car; };
 	void print() const;
 	void mostrarAlquiler() const;
 	friend istream& operator>>(istream& in, Alquiler& a);

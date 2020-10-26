@@ -5,7 +5,7 @@
 class ListaCoches
 {
 private:
-	Coche* cars;
+	Coche** cars;
 	int tam;
 	int cont;
 

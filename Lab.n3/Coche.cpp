@@ -17,16 +17,17 @@ bool Coche::operator==(const Coche& c) const
 }
 
 // *Al profesor no le mola que escriba por pantalla mientras pido datos*
-istream& operator>>(istream& in, Coche& c) 
+istream& operator>>(istream& in, Coche* c) 
 {
+	cout << "~ COCHE NUEVO ~" << endl;
 	cout << "Codigo: ";
-	in >> c.codigo;
+	in >> c->codigo;
 	cout << "Precio: ";
-	in >> c.precio;
+	in >> c->precio;
 	cout << "Modelo: ";
-	in >> c.modelo;
-	string modAux;
-	getline(cin, modAux); // por si tiene 2 palabras el modelo introducido
-	c.modelo = " " + c.modelo + modAux;
+	in >> c->modelo;
+	string aux;
+	getline(cin, aux);	
+	c->modelo = " " + c->modelo + aux;
 	return in;
 }

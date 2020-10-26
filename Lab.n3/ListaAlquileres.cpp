@@ -8,7 +8,7 @@ bool ListaAlquileres::leerAlquileres(string const& fichEntrada, const ListaCoche
 	ifstream input;
 	input.open(fichEntrada);
 
-	if (input.is_open()) //throw(Error(�No se encuentra el fichero�));
+	if (input.is_open())
 	{
 		input >> tam;
 		//tam += 10;
@@ -25,7 +25,7 @@ bool ListaAlquileres::leerAlquileres(string const& fichEntrada, const ListaCoche
 
 			if (!input.fail()) {
 				puntcoche = listaC.buscarCoche(cod);
-				rents[i] = Alquiler(cod, puntcoche, f,dias);
+				rents[i] = Alquiler(cod, puntcoche, f, dias);
 				i++;
 				cont++;
 			}
@@ -33,9 +33,10 @@ bool ListaAlquileres::leerAlquileres(string const& fichEntrada, const ListaCoche
 		input.close();
 		return true;
 	}
-	else
+	else //throw "No se encuentra el fichero";
 	{
 		input.close();
+		cout << "¡No se ha podido cargar el fichero de Coches!" << endl;
 		return false;
 	}
 }
@@ -54,7 +55,7 @@ void ListaAlquileres::ordenarAlquileres()
 	sort(&rents[0], &rents[cont], CompAlquileres);
 }
 
-void ListaAlquileres::anadirAlquiler()
+void ListaAlquileres::anadirAlquiler(const ListaCoches& listaC)
 {
 	if (cont >= tam) // Redimensiona la lista
 	{
@@ -74,6 +75,7 @@ void ListaAlquileres::anadirAlquiler()
 	Alquiler rent;
 	//rent >> cin;
 	cin >> rent;
+	rent.setPointerCar(listaC.buscarCoche(rent.getCodeCar()));
 	rents[cont] = rent;
 	cont++;
 }

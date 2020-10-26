@@ -1,6 +1,7 @@
 // Importamos las cabeceras de los módulos que necesitamos
 #include <iostream> // entrada/salida, define las variables cin y cout (console)
 #include <string> // cadenas de caracteres de la biblioteca estándar (STL)
+//#include <exception>
 
 // Clases anidadas:
 #include "Date.h"
@@ -8,6 +9,7 @@
 #include "ListaCoches.h"
 #include "Alquiler.h"
 #include "ListaAlquileres.h"
+#include "Main.h"
 
 using namespace std; /* para nombrar sin cualificar con std:: */
 
@@ -24,39 +26,44 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 	//estos métodos devuelven true o false o hay que pillar la excepción
 	if(!listaC.cargarCoches(file) || !listaA.leerAlquileres(file2, listaC))
 	{
-		cout << "ERROR AL LEER ALQUILERES";
+		cout << "ERROR AL LEER FICHEROS";
 	}
-	/*try
-	{
-		listaC.cargarCoches(file);
-		listaA.leerAlquileres(file2, listaC);
-	}
-	catch (Error e)
-	{
-		cout << e << endl;
-	}*/
+	//try
+	//{
+	//	listaC.cargarCoches(file);
+	//	//listaA.leerAlquileres(file2, listaC);
+	//}
+	//catch (string e)
+	//{
+	//	cout << e << endl;
+	//	system("pause"); // -> módulo utilsSystem
+	//	return 0;
+	//}
 
-	// MENU PRINCIPAL:
-	cout << "~ MENU PRINCIPAL ~" << endl << endl
-		<< "Escoge una opcion: " << endl
-		<< " 1 -> Mostrar Coches " << endl
-		<< " 2 -> Mostrar Alquileres " << endl
-		<< " 3 -> Agregar Coche " << endl
-		<< " 4 -> Agregar Alquiler " << endl
-		<< " 5 -> Ordenar Alquileres" << endl
-		<< " 6 -> Mostrar Lista Final de Alquileres" << endl
-		<< " 7 -> Salir del Programa " << endl << endl;
 
 
 
 	bool exit = false;
 	while (!exit)
 	{
+		// MENU PRINCIPAL:
+		cout << "~ MENU PRINCIPAL ~" << endl << endl
+			<< "Escoge una opcion: " << endl
+			<< " 1 -> Mostrar Coches " << endl
+			<< " 2 -> Mostrar Alquileres " << endl
+			<< " 3 -> Agregar Coche " << endl
+			<< " 4 -> Agregar Alquiler " << endl
+			<< " 5 -> Ordenar Alquileres" << endl
+			<< " 6 -> Mostrar Lista Final de Alquileres" << endl
+			<< " 7 -> Salir del Programa " << endl << endl;
+
 		int opt;
 		cout << "Entrada usuario: ";
 		cin >> opt;
 		cout << endl;
 		--opt; // ¿es igual que opt--?
+
+		system("CLS"); // limpia la pantalla
 
 		switch (opt)
 		{
@@ -74,7 +81,7 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 			break;
 		case 3:
 			//cout << "Agregar Alquiler" << endl;
-			listaA.anadirAlquiler();
+			listaA.anadirAlquiler(listaC);
 			break;
 		case 4:
 			cout << "Alquileres ordenados" << endl;
@@ -91,11 +98,11 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 		default:
 			break;
 		}
-		cout << endl;
+		cout << endl;		
 	}
 
 	listaC.del();
-	//delete[] listaA.rents;
+	listaA.del();
 
 	system("pause"); // -> módulo utilsSystem
 	return 0;

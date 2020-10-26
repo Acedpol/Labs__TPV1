@@ -18,8 +18,9 @@ public:
 	int getCodigo() { return codigo; };
 	string getModelo() { return modelo; };
 	bool operator==(const Coche& c) const;
-	friend istream& operator>>(istream& in, Coche& c);
+	friend istream& operator>>(istream& in, Coche* c);
 };
 
-istream& operator>>(istream& in, Coche& c); // funcion externa friendly
+istream& operator>>(istream& in, Coche* c); // funcion externa friendly
+//istream& operator>>(istream& in, Coche& c); // funcion externa friendly
 

@@ -9,11 +9,11 @@ bool ListaCoches::cargarCoches(string const& fichEntrada)
 	ifstream input;
 	input.open(fichEntrada);
 
-	if (input.is_open()) //throw(Error(“No se encuentra el fichero”)); 
+	if (input.is_open()) //throw (exception("No se encuentra el fichero"));
 	{
 		input >> tam;
 		//tam += 10;
-		cars = new Coche[tam];
+		cars = new Coche*[tam];
 		int i = 0;
 		while (!input.fail() && i < tam)
 		{
@@ -24,11 +24,11 @@ bool ListaCoches::cargarCoches(string const& fichEntrada)
 			getline(input, m);
 			if (!input.fail())
 			{
-				cars[i] = Coche(c, p, m);
+				cars[i] = new Coche(c, p, m);
 				i++;
 				cont++;
 			}
-			
+
 			/*cars[i] >> input;
 			if (!input.fail())
 			{
@@ -39,10 +39,10 @@ bool ListaCoches::cargarCoches(string const& fichEntrada)
 		input.close();
 		return true;
 	}
-	else
+	else 
 	{
 		input.close();
-		cout << "¡No se ha podido cargar el fichero!" << endl;
+		cout << "¡No se ha podido cargar el fichero de Coches!" << endl;
 		return false;
 	}
 }
@@ -53,9 +53,9 @@ Coche* ListaCoches::buscarCoche(int code) const
 	int i = 0;
 	while (i < tam && c == nullptr)		//deberia ser un for
 	{
-		if (cars[i].getCodigo() == code)
+		if (cars[i]->getCodigo() == code)
 		{
-			c = &cars[i];
+			c = cars[i];
 		}
 		i++;
 	}
@@ -68,7 +68,7 @@ void ListaCoches::anadirCoche()
 	{
 		//cout << "La lista está completa. No hay hueco disponible." << endl;
 		tam *= 2;
-		Coche* aux = new Coche[tam];
+		Coche** aux = new Coche*[tam];
 		int i = 0;
 		while (i < cont)
 		{
@@ -79,8 +79,7 @@ void ListaCoches::anadirCoche()
 		cars = aux;
 		//anadirCoche();		
 	}
-	Coche car;
-	//car >> cin;
+	Coche* car = new Coche();
 	cin >> car;
 	cars[cont] = car;
 	cont++;
@@ -93,7 +92,7 @@ void ListaCoches::print() const
 	while (i < cont)
 	{
 		cout << i << " -> ";
-		cars[i].print();
+		cars[i]->print();
 		i++;
 	}
 }
