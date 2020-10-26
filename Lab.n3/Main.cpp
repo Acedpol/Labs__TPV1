@@ -1,7 +1,6 @@
 // Importamos las cabeceras de los módulos que necesitamos
 #include <iostream> // entrada/salida, define las variables cin y cout (console)
 #include <string> // cadenas de caracteres de la biblioteca estándar (STL)
-//#include <exception>
 
 // Clases anidadas:
 #include "Date.h"
@@ -28,20 +27,6 @@ int main(int argc, char* argv[]) // Argumentos: Array de cadenas estilo C
 	{
 		cout << "ERROR AL LEER FICHEROS";
 	}
-	//try
-	//{
-	//	listaC.cargarCoches(file);
-	//	//listaA.leerAlquileres(file2, listaC);
-	//}
-	//catch (string e)
-	//{
-	//	cout << e << endl;
-	//	system("pause"); // -> módulo utilsSystem
-	//	return 0;
-	//}
-
-
-
 
 	bool exit = false;
 	while (!exit)
