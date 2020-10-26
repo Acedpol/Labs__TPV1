@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2bd3bc6e-e98a-440f-b71d-f678d6f52232}</ProjectGuid>
-    <RootNamespace>Labn3</RootNamespace>
+    <ProjectGuid>{774f9778-9819-435d-a2bd-30aeffa9d56d}</ProjectGuid>
+    <RootNamespace>Labn4</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,19 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Alquiler.cpp" />
-    <ClCompile Include="Coche.cpp" />
-    <ClCompile Include="Date.cpp" />
-    <ClCompile Include="ListaAlquileres.cpp" />
-    <ClCompile Include="ListaCoches.cpp" />
     <ClCompile Include="Main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Alquiler.h" />
-    <ClInclude Include="Coche.h" />
-    <ClInclude Include="Date.h" />
-    <ClInclude Include="ListaAlquileres.h" />
-    <ClInclude Include="ListaCoches.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
