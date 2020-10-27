@@ -8,7 +8,6 @@
 #include "ListaCoches.h"
 #include "Alquiler.h"
 #include "ListaAlquileres.h"
-#include "Main.h"
 
 using namespace std; /* para nombrar sin cualificar con std:: */
 
